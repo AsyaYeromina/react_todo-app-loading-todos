@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useEffect, useMemo, useState } from 'react';
-// import { UserWarning } from './UserWarning';
+import { UserWarning } from './UserWarning';
 import { getTodos, USER_ID } from './api/todos';
 import { Todo } from './types/Todo';
 import classNames from 'classnames';
@@ -14,12 +14,6 @@ export const App: React.FC = () => {
   const [filterValue, setFilterValue] = useState<FilterName>('ALL');
 
   const activeTodosQuantity = todos.filter(todo => !todo.completed).length;
-
-  // ? do I have a loader for showing not loaded todos ?
-
-  // if (!USER_ID) {
-  //   return <UserWarning />;
-  // }
 
   function loadTodos() {
     getTodos()
@@ -47,6 +41,9 @@ export const App: React.FC = () => {
   // function deletePost
   // function updatePost
   // function addPost
+  if (!USER_ID) {
+    return <UserWarning />;
+  }
 
   return (
     <div className="todoapp">
